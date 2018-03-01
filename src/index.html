@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Hello World!</title>
+</head>
+<style type="text/css">
+  body,html{
+      margin:0px;
+      height:100%;
+  }
+  
+  #txtEditor{
+      width:100%;
+      height:99.535%;
+      box-sizing: border-box;
+      padding:5px;
+      margin:0px;
+      border:0px;
+      font-size: 18px;
+  }
+</style>
+
+<body>
+
+  <textarea id="txtEditor"></textarea>
+
+
+  <script>
+    const remote = require('electron').remote;
+    const Menu = remote.Menu;
+    const MenuItem = remote.MenuItem;
+
+    var menu = new Menu();
+    menu.append(new MenuItem({
+      label: '剪切',
+      click: function () {
+        console.log('item 1 clicked');
+        
+      },
+      role: 'cut'
+    }));
+    menu.append(new MenuItem({
+      type: 'separator'
+    }));
+    menu.append(new MenuItem({
+      label: '复制',
+      //type: 'checkbox',
+      role: 'paste'
+      //checked: true
+    }));
+
+    window.addEventListener('contextmenu', function (e) {
+      e.preventDefault();
+      menu.popup(remote.getCurrentWindow());
+    }, false);
+  </script>
+</body>
+
+</html>
